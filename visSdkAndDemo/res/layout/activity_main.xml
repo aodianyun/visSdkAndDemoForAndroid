@@ -1,0 +1,123 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.aodianyun.vissdkanddemo.MainActivity" >
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+        
+	   <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal">
+
+
+      	<TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VIS地址" />
+
+        <EditText
+            android:id="@+id/editText_vis_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:singleLine="true" />
+              	<TextView
+            android:id="@+id/textView_uid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="uid" />
+
+        <EditText
+            android:id="@+id/editText_uid"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:singleLine="true" />
+		</LinearLayout>
+	   
+	   <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal">
+
+
+      	<TextView
+            android:id="@+id/textView_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="App:" />
+
+        <EditText
+            android:id="@+id/editText_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:singleLine="true" />
+          
+        <TextView
+            android:id="@+id/textView_stream"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stream:" />
+
+        <EditText
+            android:id="@+id/editText_stream"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:singleLine="true" />
+        
+                <TextView
+            android:id="@+id/textView_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码：" />
+
+        <EditText
+            android:id="@+id/editText_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:singleLine="true" />
+        
+		</LinearLayout>
+	    
+	   
+	    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height= "wrap_content"
+        android:layout_weight="0.22" >
+
+       <Button
+           android:id="@+id/btn_vis_publish"
+           android:layout_width="100dp"
+           android:layout_height="200dp"
+           android:layout_weight="30"
+           android:text="开始VIS上麦" />
+	   
+	
+<!-- 	        <Button
+	            android:id="@+id/btn_vis_play"
+	            android:layout_width="100dp"
+	            android:layout_height="200dp"
+	            android:layout_weight="30"
+	            android:text="开始VIS观看" /> -->
+    	</LinearLayout>
+	</LinearLayout>
+
+
+</RelativeLayout>
