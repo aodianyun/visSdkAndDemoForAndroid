@@ -107,7 +107,7 @@
            android:layout_width="100dp"
            android:layout_height="200dp"
            android:layout_weight="30"
-           android:text="开始VIS上麦" />
+           android:text="开始VIS发布" />
 	   
 	
 <!-- 	        <Button

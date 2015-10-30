@@ -155,6 +155,7 @@ public class VisActivity extends Activity implements OnClickListener{
 				Toast.makeText(VisActivity.this, "目前没有上麦位置，请重试", Toast.LENGTH_SHORT).show();
 				return;
 			}
+			vis.setBufferTime(2000);
 			this.isShowPublishActvie(true);
 			vis.StopPlay();
 			vis.Start();
