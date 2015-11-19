@@ -62,6 +62,7 @@ public class VisActivity extends Activity implements OnClickListener{
 		micBtn = (Button) findViewById(R.id.button_mic);
 		micBtn.setOnClickListener(this);
 		logText = (EditText) findViewById(R.id.editText3);
+		logText.setVisibility(View.GONE);
 		// 隐藏上麦控件
 		this.isShowPublishActvie(false);
 		// 获取vis相关参数
@@ -70,6 +71,38 @@ public class VisActivity extends Activity implements OnClickListener{
 		stream = (String)SharedPreUtil.get(this, "visStream", "visdemo");
 		pwd =(String)SharedPreUtil.get(this, "visPwd", "123456");
 		uid = (String)SharedPreUtil.get(this, "visUid", "1029");
+		
+
+		bigSv.setOnTouchListener(new View.OnTouchListener() {
+            
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                
+                switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
+                  case MotionEvent.ACTION_DOWN: {
+                      x = (int)motionEvent.getRawX();
+                      y = (int)motionEvent.getRawY();
+                      break;
+                  }
+                  case MotionEvent.ACTION_UP: {      
+                	  if((int)motionEvent.getRawX() - x > 8 && (int)motionEvent.getRawY() > 8)
+                	  {
+                          Toast.makeText(getApplicationContext(), 
+                                  "Overlapped", Toast.LENGTH_SHORT).show();
+                          logText.setVisibility(View.VISIBLE);
+                	  }
+                      break;
+                  }
+                  case MotionEvent.ACTION_MOVE: {
+
+                      break;                    
+                  }
+                }
+                return true;
+            }
+        });
+		
 		vis = new Vis_Sdk(this);
 		vis.SetVisDelegate(new Vis_Sdk.VisDelegate(){
 
@@ -90,9 +123,9 @@ public class VisActivity extends Activity implements OnClickListener{
 			bCanPublish = false;
 		}
 		vis.setBufferTime(1000);
-		vis.StartPlay();
-		smallSv.setVisibility(View.GONE);
-		bPlayOnly = true;
+//		vis.StartPlay();
+//		smallSv.setVisibility(View.GONE);
+//		bPlayOnly = true;
 		isStartVis = false;
 	}
 
@@ -160,7 +193,7 @@ public class VisActivity extends Activity implements OnClickListener{
 			vis.StopPlay();
 			vis.Start();
 			smallSv.setVisibility(View.VISIBLE);
-			//bPubishOnly = true;
+			bPubishOnly = true;
 			isStartVis = true;
 			btn_test.setText("停止");
 		}
