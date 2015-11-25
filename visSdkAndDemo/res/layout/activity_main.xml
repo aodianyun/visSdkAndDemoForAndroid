@@ -1,14 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:gravity="center_vertical"  
     tools:context="com.aodianyun.vissdkanddemo.MainActivity" >
 
+  <!--   android:background="@drawable/bjpng" -->
 	<LinearLayout
+	    android:id="@+id/ll_control"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="vertical" >
@@ -16,8 +16,7 @@
 	   <LinearLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:gravity="center_horizontal">
-
+	        >
 
       	<TextView
             android:id="@+id/textView"
@@ -29,21 +28,9 @@
             android:id="@+id/editText_vis_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
+            android:ems="15"
             android:singleLine="true" />
-              	<TextView
-            android:id="@+id/textView_uid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="uid" />
 
-        <EditText
-            android:id="@+id/editText_uid"
-            android:layout_width="66dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:singleLine="true" />
 		</LinearLayout>
 	   
 	   <LinearLayout
@@ -80,7 +67,28 @@
             android:ems="10"
             android:singleLine="true" />
         
-                <TextView
+        
+		</LinearLayout>
+	    
+	 	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal">
+        
+	  	<TextView
+            android:id="@+id/textView_uid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uid" />
+        <EditText
+            android:id="@+id/editText_uid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:singleLine="true" />
+        
+      	<TextView
             android:id="@+id/textView_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,30 +102,28 @@
             android:ems="10"
             android:singleLine="true" />
         
-		</LinearLayout>
-	    
+	   </LinearLayout>
 	   
 	    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height= "wrap_content"
-        android:layout_weight="0.22" >
+        android:layout_height= "wrap_content" 
+        android:orientation="horizontal">
 
-       <Button
-           android:id="@+id/btn_vis_publish"
-           android:layout_width="100dp"
-           android:layout_height="200dp"
-           android:layout_weight="30"
-           android:text="开始VIS发布" />
-	   
+	        <Button
+	            android:id="@+id/btn_vis_publish"
+	            android:layout_width="0dp"
+	            android:layout_height="100dp"
+	            android:layout_weight="1"
+	            android:layout_margin="5dp"
+	            android:text="@string/vis_publish" />
 	
-<!-- 	        <Button
+ 	        <Button
 	            android:id="@+id/btn_vis_play"
-	            android:layout_width="100dp"
-	            android:layout_height="200dp"
-	            android:layout_weight="30"
-	            android:text="开始VIS观看" /> -->
+	            android:layout_width="0dp"
+	            android:layout_height="100dp"
+	            android:layout_weight="1"
+	            android:layout_margin="5dp"
+	            android:text="@string/vis_play" />
     	</LinearLayout>
 	</LinearLayout>
-
-
 </RelativeLayout>

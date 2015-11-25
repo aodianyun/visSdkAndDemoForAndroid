@@ -86,12 +86,15 @@ public class VisActivity extends Activity implements OnClickListener{
                       break;
                   }
                   case MotionEvent.ACTION_UP: {      
-                	  if((int)motionEvent.getRawX() - x > 8 && (int)motionEvent.getRawY() > 8)
+                	  if((int)motionEvent.getRawX() - x > 8*3 && (int)motionEvent.getRawY() > 8*3)
                 	  {
                           Toast.makeText(getApplicationContext(), 
-                                  "Overlapped", Toast.LENGTH_SHORT).show();
+                                  "显示日志", Toast.LENGTH_SHORT).show();
                           logText.setVisibility(View.VISIBLE);
+                	  }else{
+                		  logText.setVisibility(View.GONE);
                 	  }
+                		  
                       break;
                   }
                   case MotionEvent.ACTION_MOVE: {
@@ -122,7 +125,7 @@ public class VisActivity extends Activity implements OnClickListener{
 		if(vis.Init(smallSv, bigSv, httpUrl, app, stream, pwd,uid)==false){
 			bCanPublish = false;
 		}
-		vis.setBufferTime(1000);
+//		vis.setBufferTime(1000);
 //		vis.StartPlay();
 //		smallSv.setVisibility(View.GONE);
 //		bPlayOnly = true;
@@ -177,9 +180,9 @@ public class VisActivity extends Activity implements OnClickListener{
 		if(isStartVis == true){
 			this.isShowPublishActvie(false);
 			vis.Stop();
-			smallSv.setVisibility(View.GONE);
-			vis.StartPlay();
-			//bPubishOnly = true;
+//			smallSv.setVisibility(View.GONE);
+//			vis.StartPlay();
+//			bPubishOnly = true;
 			isStartVis = false;
 			btn_test.setText("发布");
 		}else{
@@ -188,12 +191,12 @@ public class VisActivity extends Activity implements OnClickListener{
 				Toast.makeText(VisActivity.this, "目前没有上麦位置，请重试", Toast.LENGTH_SHORT).show();
 				return;
 			}
-			vis.setBufferTime(2000);
+//			vis.setBufferTime(2000);
 			this.isShowPublishActvie(true);
-			vis.StopPlay();
+//			vis.StopPlay();
 			vis.Start();
 			smallSv.setVisibility(View.VISIBLE);
-			bPubishOnly = true;
+//			bPubishOnly = true;
 			isStartVis = true;
 			btn_test.setText("停止");
 		}
@@ -263,13 +266,13 @@ public class VisActivity extends Activity implements OnClickListener{
 	private void isShowPublishActvie(boolean isShow)
 	{
 		if(isShow){
-			btnSwitchCam.setVisibility(View.VISIBLE);
-			btnChange.setVisibility(View.VISIBLE);
+			//btnSwitchCam.setVisibility(View.VISIBLE);
+			//btnChange.setVisibility(View.VISIBLE);
 			flashBtn.setVisibility(View.VISIBLE);
 			micBtn.setVisibility(View.VISIBLE);
 		}else{
-			btnSwitchCam.setVisibility(View.GONE);
-			btnChange.setVisibility(View.GONE);
+			//btnSwitchCam.setVisibility(View.GONE);
+			//btnChange.setVisibility(View.GONE);
 			flashBtn.setVisibility(View.GONE);
 			micBtn.setVisibility(View.GONE);
 		}
@@ -298,8 +301,9 @@ public class VisActivity extends Activity implements OnClickListener{
 			@Override
 			public void run() {
 				//stopPlay 为同步阻塞方法，
+				vis.stopPreview();
 				vis.Stop();
-				vis.StopPlay();
+				//vis.StopPlay();
 			}
 		}).start();
 	}
