@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import cn.nodemedia.LivePlayer;
 
 public class MainActivity extends Activity implements OnClickListener{
 	final float heng =  0.75f;
