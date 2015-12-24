@@ -12,8 +12,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aodianyun.vissdkanddemo"
-    android:versionCode="26"
-    android:versionName="1.26.201512150936" >
+    android:versionCode="28"
+    android:versionName="1.28.201512241234" >
 
     <uses-sdk
         android:minSdkVersion="8"
