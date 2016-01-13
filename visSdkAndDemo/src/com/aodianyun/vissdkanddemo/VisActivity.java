@@ -11,11 +11,20 @@
 package com.aodianyun.vissdkanddemo;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.json.JSONObject;
 
 import com.aodianyun.Vis_Sdk;
+import com.aodianyun.dms.android.DMS;
+import com.aodianyun.util.DmsTools;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,7 +41,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import cn.nodemedia.LivePublisher;
+
 
 public class VisActivity extends Activity implements OnClickListener{
 	private SurfaceView smallSv;
@@ -43,7 +52,7 @@ public class VisActivity extends Activity implements OnClickListener{
 	private Boolean enableVideo = true, isStartVis = false,bPlayOnly = false,bCanPublish=true,bPubishOnly=false;
 	private boolean bBigPublish=false;
 	private String httpUrl = null,app = null, stream = null,pwd,uid;
-	private EditText logText;
+	private EditText logText,timeText;
     private int x;
     private int y;
 	private boolean isMicOn = true;
@@ -73,6 +82,8 @@ public class VisActivity extends Activity implements OnClickListener{
 		micBtn.setOnClickListener(this);
 		logText = (EditText) findViewById(R.id.editText3);
 		logText.setVisibility(View.GONE);
+		timeText = (EditText) findViewById(R.id.textview_time);
+		timeText.setVisibility(View.GONE);
 		// 隐藏上麦控件
 		this.isShowPublishActvie(false);
 		// 获取vis相关参数
@@ -101,8 +112,10 @@ public class VisActivity extends Activity implements OnClickListener{
                           Toast.makeText(getApplicationContext(), 
                                   "显示日志", Toast.LENGTH_SHORT).show();
                           logText.setVisibility(View.VISIBLE);
+                          timeText.setVisibility(View.VISIBLE);
                 	  }else{
                 		  logText.setVisibility(View.GONE);
+                		  timeText.setVisibility(View.GONE);
                 	  }
                 		  
                       break;
@@ -326,14 +339,24 @@ public class VisActivity extends Activity implements OnClickListener{
 			super.handleMessage(msg);
 
 			StringBuffer sb = new StringBuffer();
+			StringBuffer sbTime = new StringBuffer();
 			SimpleDateFormat sDateFormat = new SimpleDateFormat("HH:mm:ss:SSS");
 			String sRecTime = sDateFormat.format(new java.util.Date());
-			sb.append(sRecTime);
-			sb.append(" - ");
-			sb.append(msg.getData().getString("msg"));
-			sb.append("\r\n");
-			logText.append(sb);
-
+			if(msg.what == vis.VISLOGEVENT){
+				sbTime.append(sRecTime);
+				sbTime.append(" - ");
+				String tmp = msg.getData().getString("msg");
+				sbTime.append(tmp);	
+				//DmsTools.push(tmp,app,stream);
+				sbTime.append("\r\n");
+				timeText.append(sbTime);
+			}else{
+				sb.append(sRecTime);
+				sb.append(" - ");
+				sb.append(msg.getData().getString("msg"));
+				sb.append("\r\n");
+				logText.append(sb);
+			}
 			switch (msg.what) {
 			case 1000:
 				 Toast.makeText(VisActivity.this, "正在连接视频",

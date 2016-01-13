@@ -13,7 +13,7 @@ package com.aodianyun.vissdkanddemo;
 import java.text.SimpleDateFormat;
 
 import com.aodianyun.Vis_Sdk;
-import com.aodianyun.vissdkanddemo.R.drawable;
+import com.aodianyun.util.DmsTools;
 
 import android.app.Activity;
 import android.view.View.OnClickListener;
@@ -35,7 +35,7 @@ public class VisPlayActivity extends Activity implements OnClickListener{
 	int tsID;
 	String outTsPath;
 	SurfaceView sv;
-	EditText logText;
+	EditText logText,timeText;
 	Boolean showLog, enableVideo;
 	float srcWidth;
 	float srcHeight;
@@ -69,6 +69,9 @@ public class VisPlayActivity extends Activity implements OnClickListener{
 		sv = (SurfaceView) findViewById(R.id.surfaceview_play);
 		logText = (EditText) findViewById(R.id.editText3);
 		logText.setVisibility(View.GONE);
+		
+		timeText = (EditText) findViewById(R.id.textview_time);
+		timeText.setVisibility(View.GONE);
 		btn_play = (Button) findViewById(R.id.btn_visplay);
 		btn_play.setOnClickListener(this);
 		setListener();
@@ -100,8 +103,10 @@ public class VisPlayActivity extends Activity implements OnClickListener{
                           Toast.makeText(getApplicationContext(), 
                                   "显示日志", Toast.LENGTH_SHORT).show();
                           logText.setVisibility(View.VISIBLE);
+                          timeText.setVisibility(View.VISIBLE);
                 	  }else{
                 		  logText.setVisibility(View.GONE);
+                		  timeText.setVisibility(View.GONE);
                 	  }
                 		  
                       break;
@@ -167,13 +172,24 @@ public class VisPlayActivity extends Activity implements OnClickListener{
 			super.handleMessage(msg);
 
 			StringBuffer sb = new StringBuffer();
+			StringBuffer sbTime = new StringBuffer();
 			SimpleDateFormat sDateFormat = new SimpleDateFormat("HH:mm:ss:SSS");
 			String sRecTime = sDateFormat.format(new java.util.Date());
-			sb.append(sRecTime);
-			sb.append(" - ");
-			sb.append(msg.getData().getString("msg"));
-			sb.append("\r\n");
-			logText.append(sb);
+			if(msg.what == vis.VISLOGEVENT){
+				sbTime.append(sRecTime);
+				sbTime.append(" - ");
+				String tmp = msg.getData().getString("msg");
+				sbTime.append(tmp);
+				//DmsTools.push(tmp, app,stream);
+				sbTime.append("\r\n");
+				timeText.append(sbTime);
+			}else{
+				sb.append(sRecTime);
+				sb.append(" - ");
+				sb.append(msg.getData().getString("msg"));
+				sb.append("\r\n");
+				logText.append(sb);
+			}
 
 			switch (msg.what) {
 			case 1000:
